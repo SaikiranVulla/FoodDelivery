@@ -1,11 +1,21 @@
 import React from 'react';
 import Onboarding from 'react-native-onboarding-swiper';
-import {View, Text, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import LottieView from 'lottie-react-native';
+import {setItem} from '../Utils/AsyncStorage';
+
+const {width, height} = Dimensions.get('window');
 
 const OnBoardScreen = ({navigation}) => {
   const onDone = () => {
     navigation.navigate('Home');
+    setItem('isOnBoard', '1');
   };
 
   const Title = ({title}) => <Text style={styles.title}>{title}</Text>;
@@ -30,16 +40,29 @@ const OnBoardScreen = ({navigation}) => {
     );
   };
 
+  const doneButton = () => {
+    return (
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={{padding: 20}}
+        onPress={onDone}>
+        <Text style={styles.doneButton}>Done</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <Onboarding
       onDone={onDone}
+      onSkip={onDone}
       DotComponent={Dots}
+      DoneButtonComponent={doneButton}
       bottomBarHighlight={false}
       bottomBarHeight={80}
       bottomBarStyle={styles.bottomBar}
       pages={[
         {
-          backgroundColor: '#fff',
+          backgroundColor: '#a7f3d0',
           image: (
             <LottieView
               source={require('../../assets/animations/onBoarding2.json')}
@@ -59,7 +82,7 @@ const OnBoardScreen = ({navigation}) => {
           ),
         },
         {
-          backgroundColor: '#fff',
+          backgroundColor: '#fef3c7',
           image: (
             <LottieView
               source={require('../../assets/animations/onBoarding3.json')}
@@ -77,7 +100,7 @@ const OnBoardScreen = ({navigation}) => {
           ),
         },
         {
-          backgroundColor: '#fff',
+          backgroundColor: '#daf7a6',
           image: (
             <LottieView
               source={require('../../assets/animations/onBoarding1.json')}
@@ -103,8 +126,8 @@ const OnBoardScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   image: {
-    width: 400,
-    height: 200,
+    width: width * 0.9,
+    height: width,
   },
   title: {
     fontSize: 24,
@@ -119,6 +142,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  doneButton: {
+    fontFamily: 'Poppins-SemiBold',
   },
 });
 
