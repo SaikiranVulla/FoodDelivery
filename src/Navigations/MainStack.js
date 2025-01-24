@@ -20,9 +20,9 @@ export default function MainStack() {
     });
   }, []);
 
-  // if (isOnBoardScreen == null) {
-  //   return null;
-  // }
+  if (isOnBoardScreen == null) {
+    return null;
+  }
 
   if (isOnBoardScreen) {
     return (
