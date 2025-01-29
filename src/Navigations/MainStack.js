@@ -1,9 +1,12 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from '../Container/HomeScreen';
-import SearchScreen from '../Container/SearchScreen';
-import OnBoardScreen from '../Container/OnBoardScreen';
 import React, {useState, useEffect} from 'react';
 import {getItem} from '../Utils/AsyncStorage';
+import {
+  HomeScreen,
+  OnBoardScreen,
+  SearchScreen,
+  LoginScreen,
+} from '../Container';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,7 +29,12 @@ export default function MainStack() {
 
   if (isOnBoardScreen) {
     return (
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Home"
           component={HomeScreen}
