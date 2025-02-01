@@ -2,6 +2,7 @@ import {StyleSheet, Text, View, Button} from 'react-native';
 import React from 'react';
 import {removeItem} from '../Utils/AsyncStorage';
 import auth from '@react-native-firebase/auth';
+import ICON from 'react-native-vector-icons/AntDesign';
 
 const HomeScreen = () => {
   const signUp = () => {
@@ -24,8 +25,8 @@ const HomeScreen = () => {
   };
   return (
     <View>
-      <Text style={styles.normalText}>HomeScreen</Text>
-      <Button title="ONPress" onPress={() => signUp()} />
+      <Text>HomeScreen</Text>
+      <ICON name="stepforward" size={30} />
     </View>
   );
 };
